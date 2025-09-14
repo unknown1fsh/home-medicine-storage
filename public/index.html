@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evdeki İlaç Depom</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c5aa0;
+            --secondary-color: #f8f9fa;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+        }
+        
+        body {
+            background-color: var(--secondary-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            color: var(--primary-color) !important;
+        }
+        
+        .card {
+            border: none;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            border-radius: 0.5rem;
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 0.5rem 0.5rem 0 0 !important;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #1e3d6f;
+            border-color: #1e3d6f;
+        }
+        
+        .status-good {
+            color: var(--success-color);
+        }
+        
+        .status-warning {
+            color: var(--warning-color);
+        }
+        
+        .status-critical {
+            color: var(--danger-color);
+        }
+        
+        .status-expired {
+            color: var(--danger-color);
+            font-weight: bold;
+        }
+        
+        .barcode-scanner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: none;
+        }
+        
+        .scanner-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .scanner-video {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            max-height: 100vh;
+        }
+        
+        .scanner-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 300px;
+            height: 60%;
+            max-height: 200px;
+            border: 3px solid #fff;
+            border-radius: 15px;
+            pointer-events: none;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        .scanner-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .scanner-close:hover {
+            background: rgba(255, 0, 0, 0.8);
+        }
+        
+        .scanner-instructions {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner-border {
+            color: var(--primary-color);
+        }
+        
+        .alert-item {
+            border-left: 4px solid;
+            margin-bottom: 10px;
+        }
+        
+        .alert-30-days {
+            border-left-color: var(--info-color);
+        }
+        
+        .alert-15-days {
+            border-left-color: var(--warning-color);
+        }
+        
+        .alert-7-days {
+            border-left-color: var(--danger-color);
+        }
+        
+        .alert-expired {
+            border-left-color: var(--danger-color);
+            background-color: #f8d7da;
+        }
+        
+        @media (max-width: 768px) {
+            .container-fluid {
+                padding: 10px;
+            }
+            
+            .card {
+                margin-bottom: 15px;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .btn-group .btn {
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-pills me-2"></i>
+                Evdeki İlaç Depom
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showDashboard()">
+                            <i class="fas fa-home me-1"></i>Ana Sayfa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showMedicines()">
+                            <i class="fas fa-pills me-1"></i>İlaçlar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showStocks()">
+                            <i class="fas fa-boxes me-1"></i>Stoklar
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showAlerts()">
+                            <i class="fas fa-exclamation-triangle me-1"></i>Uyarılar
+                            <span class="badge bg-danger ms-1" id="alertBadge" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" id="adminNavItem" style="display: none;">
+                        <a class="nav-link" href="#" onclick="showAdminPanel()">
+                            <i class="fas fa-cog me-1"></i>Admin Panel
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i>
+                            <span id="userName">Kullanıcı</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="showProfile()">
+                                <i class="fas fa-user me-2"></i>Profil
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showSettings()">
+                                <i class="fas fa-cog me-2"></i>Ayarlar
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()">
+                                <i class="fas fa-sign-out-alt me-2"></i>Çıkış Yap
+                            </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <!-- Dashboard -->
+        <div id="dashboard" class="content-section">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-pills fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Toplam İlaç</h5>
+                            <h3 class="text-primary" id="totalMedicines">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-boxes fa-3x text-success mb-3"></i>
+                            <h5 class="card-title">Toplam Stok</h5>
+                            <h3 class="text-success" id="totalStocks">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-exclamation-triangle fa-3x text-warning mb-3"></i>
+                            <h5 class="card-title">Yaklaşan Son Kullanım</h5>
+                            <h3 class="text-warning" id="expiringSoon">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-times-circle fa-3x text-danger mb-3"></i>
+                            <h5 class="card-title">Süresi Geçmiş</h5>
+                            <h3 class="text-danger" id="expired">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-qrcode me-2"></i>
+                                Barkod Okut
+                            </h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <button class="btn btn-primary btn-lg" onclick="startBarcodeScanner()">
+                                <i class="fas fa-camera me-2"></i>
+                                Barkod/Karekod Okut
+                            </button>
+                            <p class="text-muted mt-3">İlacın barkodunu veya karekodunu okutarak bilgilerini çekin</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-plus me-2"></i>
+                                Hızlı İşlemler
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-outline-primary" onclick="showAddMedicineForm()">
+                                    <i class="fas fa-pills me-2"></i>Yeni İlaç Ekle
+                                </button>
+                                <button class="btn btn-outline-success" onclick="showAddStockForm()">
+                                    <i class="fas fa-boxes me-2"></i>Stok Ekle
+                                </button>
+                                <button class="btn btn-outline-warning" onclick="checkExpiryAlerts()">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>Son Kullanım Kontrolü
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Medicines Section -->
+        <div id="medicines" class="content-section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-pills me-2"></i>İlaçlar</h2>
+                <button class="btn btn-primary" onclick="showAddMedicineForm()">
+                    <i class="fas fa-plus me-2"></i>Yeni İlaç
+                </button>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Barkod</th>
+                                    <th>İlaç Adı</th>
+                                    <th>Etken Madde</th>
+                                    <th>Üretici</th>
+                                    <th>Stok Sayısı</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="medicinesTable">
+                                <!-- Medicines will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stocks Section -->
+        <div id="stocks" class="content-section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-boxes me-2"></i>Stoklar</h2>
+                <button class="btn btn-primary" onclick="showAddStockForm()">
+                    <i class="fas fa-plus me-2"></i>Yeni Stok
+                </button>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>İlaç Adı</th>
+                                    <th>Miktar</th>
+                                    <th>Son Kullanım</th>
+                                    <th>Durum</th>
+                                    <th>Konum</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stocksTable">
+                                <!-- Stocks will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Alerts Section -->
+        <div id="alerts" class="content-section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-exclamation-triangle me-2"></i>Uyarılar</h2>
+                <div>
+                    <button class="btn btn-outline-primary me-2" onclick="checkExpiryAlerts()">
+                        <i class="fas fa-sync me-2"></i>Kontrol Et
+                    </button>
+                    <button class="btn btn-outline-success" onclick="markAllAlertsRead()">
+                        <i class="fas fa-check me-2"></i>Tümünü Okundu İşaretle
+                    </button>
+                </div>
+            </div>
+            <div id="alertsContainer">
+                <!-- Alerts will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Admin Panel Section -->
+        <div id="adminPanel" class="content-section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-cog me-2"></i>Admin Panel</h2>
+                <div>
+                    <button class="btn btn-outline-primary me-2" onclick="loadAdminStats()">
+                        <i class="fas fa-sync me-2"></i>Yenile
+                    </button>
+                </div>
+            </div>
+
+            <!-- Admin Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                            <h5 class="card-title">Toplam Kullanıcı</h5>
+                            <h3 class="text-primary" id="totalUsers">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-user-check fa-3x text-success mb-3"></i>
+                            <h5 class="card-title">Aktif Kullanıcı</h5>
+                            <h3 class="text-success" id="activeUsers">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-user-shield fa-3x text-warning mb-3"></i>
+                            <h5 class="card-title">Admin Kullanıcı</h5>
+                            <h3 class="text-warning" id="adminUsers">0</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <i class="fas fa-pills fa-3x text-info mb-3"></i>
+                            <h5 class="card-title">Toplam İlaç</h5>
+                            <h3 class="text-info" id="totalMedicinesAdmin">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Management -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-users me-2"></i>
+                        Kullanıcı Yönetimi
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ad Soyad</th>
+                                    <th>Kullanıcı Adı</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                    <th>Durum</th>
+                                    <th>Son Giriş</th>
+                                    <th>Kayıt Tarihi</th>
+                                    <th>İşlemler</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTable">
+                                <!-- Users will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="profile" class="content-section" style="display: none;">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-user me-2"></i>Profil Bilgileri</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Kişisel Bilgiler</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="profileForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Ad</label>
+                                    <input type="text" class="form-control" id="profileFirstName">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Soyad</label>
+                                    <input type="text" class="form-control" id="profileLastName">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="profileEmail">
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>Kaydet
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Şifre Değiştir</h5>
+                        </div>
+                        <div class="card-body">
+                            <form id="passwordForm">
+                                <div class="mb-3">
+                                    <label class="form-label">Mevcut Şifre</label>
+                                    <input type="password" class="form-control" id="currentPassword">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Yeni Şifre</label>
+                                    <input type="password" class="form-control" id="newPassword" minlength="6">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Yeni Şifre (Tekrar)</label>
+                                    <input type="password" class="form-control" id="confirmPassword" minlength="6">
+                                </div>
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="fas fa-key me-2"></i>Şifre Değiştir
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Barcode Scanner Modal -->
+    <div id="barcodeScanner" class="barcode-scanner">
+        <div class="scanner-container">
+            <video id="scannerVideo" class="scanner-video" autoplay muted playsinline></video>
+            <div class="scanner-overlay"></div>
+            <button class="scanner-close" onclick="stopBarcodeScanner()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="scanner-instructions">
+                <i class="fas fa-camera me-2"></i>
+                Barkodu kameraya doğru tutun
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="loading" class="loading">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Yükleniyor...</span>
+        </div>
+        <p class="mt-2">Yükleniyor...</p>
+    </div>
+
+    <!-- Modals will be added here -->
+    <div id="modalsContainer"></div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

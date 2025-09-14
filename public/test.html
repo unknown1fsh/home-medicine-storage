@@ -1,0 +1,122 @@
+// Loop sorununu çözmek için basit bir test sayfası
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Evdeki İlaç Depom</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🔧 Test Sayfası</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Bu sayfa loop sorununu test etmek için oluşturuldu.</p>
+                        
+                        <div class="mb-3">
+                            <h5>LocalStorage Durumu:</h5>
+                            <div id="storageInfo" class="alert alert-info">
+                                <!-- Storage bilgileri buraya gelecek -->
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <h5>API Test:</h5>
+                            <div id="apiInfo" class="alert alert-secondary">
+                                <!-- API bilgileri buraya gelecek -->
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" onclick="testLogin()">Login Test</button>
+                            <button class="btn btn-success" onclick="testDashboard()">Dashboard Test</button>
+                            <button class="btn btn-warning" onclick="clearAll()">Temizle</button>
+                            <button class="btn btn-info" onclick="goToDebug()">Debug Sayfası</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test sayfası yüklendi');
+            updateStorageInfo();
+            testAPI();
+        });
+        
+        function updateStorageInfo() {
+            const container = document.getElementById('storageInfo');
+            const token = localStorage.getItem('authToken');
+            const user = localStorage.getItem('user');
+            
+            let html = '';
+            html += `<strong>Token:</strong> ${token ? 'Mevcut' : 'Yok'}<br>`;
+            html += `<strong>User:</strong> ${user ? 'Mevcut' : 'Yok'}<br>`;
+            
+            if (user) {
+                try {
+                    const userData = JSON.parse(user);
+                    html += `<strong>Kullanıcı:</strong> ${userData.firstName} ${userData.lastName}<br>`;
+                    html += `<strong>Rol:</strong> ${userData.role}`;
+                } catch (e) {
+                    html += `<strong>Hata:</strong> ${e.message}`;
+                }
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        async function testAPI() {
+            const container = document.getElementById('apiInfo');
+            container.innerHTML = 'API test ediliyor...';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/health');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    container.innerHTML = `
+                        <strong>API Durumu:</strong> Çalışıyor<br>
+                        <strong>Database:</strong> ${data.database}<br>
+                        <strong>Status:</strong> ${data.status}
+                    `;
+                } else {
+                    container.innerHTML = `<strong>API Hatası:</strong> ${response.status}`;
+                }
+            } catch (error) {
+                container.innerHTML = `<strong>Bağlantı Hatası:</strong> ${error.message}`;
+            }
+        }
+        
+        function testLogin() {
+            console.log('Login test başlatılıyor...');
+            window.location.href = '/';
+        }
+        
+        function testDashboard() {
+            console.log('Dashboard test başlatılıyor...');
+            window.location.href = '/dashboard';
+        }
+        
+        function clearAll() {
+            console.log('Tüm veriler temizleniyor...');
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('user');
+            updateStorageInfo();
+            alert('Tüm veriler temizlendi!');
+        }
+        
+        function goToDebug() {
+            window.location.href = '/debug';
+        }
+    </script>
+</body>
+</html>
