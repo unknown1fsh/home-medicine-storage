@@ -17,7 +17,7 @@ class MedicineStorageApp {
                 return;
             }
 
-            console.log('Authentication successful, setting up interface');
+            // Authentication successful, setting up interface
             this.setupUserInterface();
             await this.loadDashboard();
             this.setupEventListeners();
@@ -49,7 +49,7 @@ class MedicineStorageApp {
             
             try {
                 this.user = JSON.parse(user);
-                console.log('User data loaded:', this.user.username);
+                // User data loaded successfully
                 return true;
             } catch (parseError) {
                 console.error('User data parse error:', parseError);
@@ -1025,7 +1025,7 @@ function logout() {
 
 // Form event listeners
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing app');
+    // DOM loaded, initializing app
     
     // App'i başlat
     try {

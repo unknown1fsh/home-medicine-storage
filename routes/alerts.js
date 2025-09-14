@@ -31,7 +31,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // Okunmamış uyarıları getir
-router.get('/unread', async (req, res) => {
+router.get('/unread', verifyToken, async (req, res) => {
   try {
     const alerts = await db.query(`
       SELECT ea.*, ms.quantity, ms.expiry_date, ms.location,
@@ -39,9 +39,9 @@ router.get('/unread', async (req, res) => {
       FROM expiry_alerts ea
       JOIN medicine_stocks ms ON ea.medicine_stock_id = ms.id
       JOIN medicines m ON ms.medicine_id = m.id
-      WHERE ea.is_read = FALSE
+      WHERE ea.user_id = ? AND ea.is_read = FALSE
       ORDER BY ea.created_at DESC
-    `);
+    `, [req.user.id]);
     
     res.json({
       success: true,
@@ -57,13 +57,13 @@ router.get('/unread', async (req, res) => {
 });
 
 // Uyarıyı okundu olarak işaretle
-router.put('/:id/read', async (req, res) => {
+router.put('/:id/read', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     
     const result = await db.query(
-      'UPDATE expiry_alerts SET is_read = TRUE WHERE id = ?',
-      [id]
+      'UPDATE expiry_alerts SET is_read = TRUE WHERE id = ? AND user_id = ?',
+      [id, req.user.id]
     );
     
     if (result.affectedRows === 0) {
@@ -87,10 +87,11 @@ router.put('/:id/read', async (req, res) => {
 });
 
 // Tüm uyarıları okundu olarak işaretle
-router.put('/read-all', async (req, res) => {
+router.put('/read-all', verifyToken, async (req, res) => {
   try {
     await db.query(
-      'UPDATE expiry_alerts SET is_read = TRUE WHERE is_read = FALSE'
+      'UPDATE expiry_alerts SET is_read = TRUE WHERE is_read = FALSE AND user_id = ?',
+      [req.user.id]
     );
     
     res.json({
@@ -137,7 +138,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Son kullanım tarihi uyarılarını kontrol et ve oluştur
-router.post('/check-expiry', async (req, res) => {
+router.post('/check-expiry', verifyToken, async (req, res) => {
   try {
     const today = moment();
     

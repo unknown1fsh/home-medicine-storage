@@ -51,7 +51,7 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // Belirli bir ilacın stoklarını getir
-router.get('/medicine/:medicineId', async (req, res) => {
+router.get('/medicine/:medicineId', verifyToken, async (req, res) => {
   try {
     const { medicineId } = req.params;
     
@@ -59,9 +59,9 @@ router.get('/medicine/:medicineId', async (req, res) => {
       SELECT ms.*, m.name as medicine_name, m.barcode
       FROM medicine_stocks ms
       JOIN medicines m ON ms.medicine_id = m.id
-      WHERE ms.medicine_id = ?
+      WHERE ms.medicine_id = ? AND ms.user_id = ? AND m.user_id = ?
       ORDER BY ms.expiry_date ASC
-    `, [medicineId]);
+    `, [medicineId, req.user.id, req.user.id]);
     
     res.json({
       success: true,
@@ -77,7 +77,7 @@ router.get('/medicine/:medicineId', async (req, res) => {
 });
 
 // Yeni stok ekle
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
   try {
     const {
       medicine_id,
@@ -97,10 +97,10 @@ router.post('/', async (req, res) => {
       });
     }
     
-    // İlaç var mı kontrol et
+    // İlaç var mı kontrol et (kullanıcının ilacı olmalı)
     const medicine = await db.query(
-      'SELECT id FROM medicines WHERE id = ?',
-      [medicine_id]
+      'SELECT id FROM medicines WHERE id = ? AND user_id = ?',
+      [medicine_id, req.user.id]
     );
     
     if (medicine.length === 0) {
@@ -111,9 +111,9 @@ router.post('/', async (req, res) => {
     }
     
     const result = await db.query(`
-      INSERT INTO medicine_stocks (medicine_id, quantity, purchase_date, expiry_date, purchase_price, location, notes)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
-    `, [medicine_id, quantity, purchase_date, expiry_date, purchase_price, location, notes]);
+      INSERT INTO medicine_stocks (medicine_id, quantity, purchase_date, expiry_date, purchase_price, location, notes, user_id)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `, [medicine_id, quantity, purchase_date, expiry_date, purchase_price, location, notes, req.user.id]);
     
     const newStock = await db.query(`
       SELECT ms.*, m.name as medicine_name, m.barcode
@@ -137,7 +137,7 @@ router.post('/', async (req, res) => {
 });
 
 // Stok güncelle
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     const updateData = req.body;
@@ -170,15 +170,15 @@ router.put('/:id', async (req, res) => {
     await db.query(`
       UPDATE medicine_stocks 
       SET ${updateFields.join(', ')}
-      WHERE id = ?
-    `, updateValues);
+      WHERE id = ? AND user_id = ?
+    `, [...updateValues, req.user.id]);
     
     const updatedStock = await db.query(`
       SELECT ms.*, m.name as medicine_name, m.barcode
       FROM medicine_stocks ms
       JOIN medicines m ON ms.medicine_id = m.id
-      WHERE ms.id = ?
-    `, [id]);
+      WHERE ms.id = ? AND ms.user_id = ?
+    `, [id, req.user.id]);
     
     if (updatedStock.length === 0) {
       return res.status(404).json({
@@ -202,13 +202,13 @@ router.put('/:id', async (req, res) => {
 });
 
 // Stok sil
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, async (req, res) => {
   try {
     const { id } = req.params;
     
     const result = await db.query(
-      'DELETE FROM medicine_stocks WHERE id = ?',
-      [id]
+      'DELETE FROM medicine_stocks WHERE id = ? AND user_id = ?',
+      [id, req.user.id]
     );
     
     if (result.affectedRows === 0) {
@@ -232,7 +232,7 @@ router.delete('/:id', async (req, res) => {
 });
 
 // Yaklaşan son kullanım tarihleri
-router.get('/expiring/:days', async (req, res) => {
+router.get('/expiring/:days', verifyToken, async (req, res) => {
   try {
     const { days } = req.params;
     const daysInt = parseInt(days);
@@ -248,9 +248,9 @@ router.get('/expiring/:days', async (req, res) => {
       SELECT ms.*, m.name as medicine_name, m.barcode, m.active_ingredient
       FROM medicine_stocks ms
       JOIN medicines m ON ms.medicine_id = m.id
-      WHERE ms.expiry_date <= DATE_ADD(CURDATE(), INTERVAL ? DAY)
+      WHERE ms.expiry_date <= DATE_ADD(CURDATE(), INTERVAL ? DAY) AND ms.user_id = ? AND m.user_id = ?
       ORDER BY ms.expiry_date ASC
-    `, [daysInt]);
+    `, [daysInt, req.user.id, req.user.id]);
     
     res.json({
       success: true,
