@@ -1,0 +1,656 @@
+[
+  {
+    "barcode": "8699514090016",
+    "name": "Parol 500 mg 20 Tablet",
+    "active_ingredient": "Paracetamol",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "500 mg",
+    "package_size": "20 Tablet",
+    "description": "Parasetamol içeren analjezik ve antipiretik.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında, kuru yerde saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699522075144",
+    "name": "Majezik 100 mg 15 Tablet",
+    "active_ingredient": "Flurbiprofen",
+    "manufacturer": "Sanovel İlaç Sanayi ve Ticaret A.Ş.",
+    "dosage_form": "Film Tablet",
+    "strength": "100 mg",
+    "package_size": "15 Tablet",
+    "description": "Nonsteroidal antiinflamatuvar analjezik.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699536090010",
+    "name": "Nurofen Cold Flu 200 mg + 5 mg 24 Tablet",
+    "active_ingredient": "Ibuprofen / Phenylephrine",
+    "manufacturer": "Reckitt Benckiser",
+    "dosage_form": "Kaplı Tablet",
+    "strength": "200 mg + 5 mg",
+    "package_size": "24 Tablet",
+    "description": "Soğuk algınlığı semptomlarını gidermeye yardımcı analjezik.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699518350017",
+    "name": "Aspirin 300 mg 20 Tablet",
+    "active_ingredient": "Acetylsalicylic Acid",
+    "manufacturer": "Bayer Türk Kimya San. Ltd. Şti.",
+    "dosage_form": "Tablet",
+    "strength": "300 mg",
+    "package_size": "20 Tablet",
+    "description": "Analjezik, antipiretik ve antiinflamatuvar etkiye sahip.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699760870016",
+    "name": "A-FERİN Forte 650 mg 10 Tablet",
+    "active_ingredient": "Paracetamol / Chlorphenamine / Phenylephrine",
+    "manufacturer": "Bilim İlaç",
+    "dosage_form": "Tablet",
+    "strength": "650 mg + 4 mg + 10 mg",
+    "package_size": "10 Tablet",
+    "description": "Ateş düşürücü ve burun açıcı soğuk algınlığı ilacı.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514096063",
+    "name": "Tylol Hot 500 mg toz içeren 6 saşe",
+    "active_ingredient": "Paracetamol / Phenylephrine / Vitamin C",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Toz içeren saşe",
+    "strength": "500 mg + 10 mg + 60 mg",
+    "package_size": "6 Saşe",
+    "description": "Sıcak içecek formunda soğuk algınlığı ilacı.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "30°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699518430015",
+    "name": "Calpol 120 mg/5 ml Pediatrik Şurup 150 ml",
+    "active_ingredient": "Paracetamol",
+    "manufacturer": "Johnson & Johnson Sıhhı Mamüller",
+    "dosage_form": "Şurup",
+    "strength": "120 mg/5 ml",
+    "package_size": "150 ml Şurup",
+    "description": "Çocuklar için ateş düşürücü ve ağrı kesici.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Dondurmayınız"
+    ]
+  },
+  {
+    "barcode": "8699518355012",
+    "name": "Aspirin Protect 100 mg 30 Tablet",
+    "active_ingredient": "Acetylsalicylic Acid",
+    "manufacturer": "Bayer Türk Kimya San. Ltd. Şti.",
+    "dosage_form": "Enterik Kaplı Tablet",
+    "strength": "100 mg",
+    "package_size": "30 Tablet",
+    "description": "Düşük doz kardiyoprotektif aspirin.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699522650013",
+    "name": "Augmentin-BID 1000 mg 14 Tablet",
+    "active_ingredient": "Amoxicillin / Clavulanic Acid",
+    "manufacturer": "GlaxoSmithKline İlaçları San. ve Tic. A.Ş.",
+    "dosage_form": "Film Tablet",
+    "strength": "875 mg + 125 mg",
+    "package_size": "14 Tablet",
+    "description": "Geniş spektrumlu antibiyotik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699504140017",
+    "name": "Devit-3 15 ml oral damla",
+    "active_ingredient": "Cholecalciferol (Vitamin D3)",
+    "manufacturer": "Deva Holding A.Ş.",
+    "dosage_form": "Oral Damla",
+    "strength": "15000 IU/ml",
+    "package_size": "15 ml Flakon",
+    "description": "D vitamini eksikliğinde kullanılan damla.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Işıktan koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699514095080",
+    "name": "Vermisid 250 mg 6 Tablet",
+    "active_ingredient": "Mebendazole",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Çiğneme Tablet",
+    "strength": "250 mg",
+    "package_size": "6 Tablet",
+    "description": "Geniş spektrumlu antihelmintik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699505790014",
+    "name": "Levotiron 50 mcg 100 Tablet",
+    "active_ingredient": "Levothyroxine Sodium",
+    "manufacturer": "Abdi İbrahim İlaç San. ve Tic. A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "50 mcg",
+    "package_size": "100 Tablet",
+    "description": "Tiroid hormon replasman tedavisinde kullanılır.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699514097060",
+    "name": "Sefdin 300 mg 14 Kapsül",
+    "active_ingredient": "Cefdinir",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Kapsül",
+    "strength": "300 mg",
+    "package_size": "14 Kapsül",
+    "description": "Seftin sınıfı geniş spektrumlu antibiyotik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699569090012",
+    "name": "Prednol 16 mg 20 Tablet",
+    "active_ingredient": "Methylprednisolone",
+    "manufacturer": "Mustafa Nevzat İlaç Sanayii A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "16 mg",
+    "package_size": "20 Tablet",
+    "description": "Glukokortikoid antiinflamatuvar.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699798030019",
+    "name": "Arveles 25 mg 10 Tablet",
+    "active_ingredient": "Dexketoprofen Trometamol",
+    "manufacturer": "Menarini - İbrahim Ethem",
+    "dosage_form": "Film Tablet",
+    "strength": "25 mg",
+    "package_size": "10 Tablet",
+    "description": "Hızlı etki eden nonsteroidal analjezik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514097039",
+    "name": "Macrol 500 mg 14 Tablet",
+    "active_ingredient": "Clarithromycin",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Film Tablet",
+    "strength": "500 mg",
+    "package_size": "14 Tablet",
+    "description": "Makrolid sınıfı antibiyotik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699514094120",
+    "name": "Bemiks B12 2 ml 5 Ampul",
+    "active_ingredient": "Thiamine / Riboflavin / Pyridoxine / Cyanocobalamin",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Enjeksiyonluk Çözelti",
+    "strength": "B Grup Vitaminleri",
+    "package_size": "5 Ampul",
+    "description": "B grubu vitamin kombinasyonu.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Işıktan koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699504146033",
+    "name": "Lustral 50 mg 28 Tablet",
+    "active_ingredient": "Sertraline",
+    "manufacturer": "Pfizer İlaçları Ltd. Şti.",
+    "dosage_form": "Film Tablet",
+    "strength": "50 mg",
+    "package_size": "28 Tablet",
+    "description": "Selektif serotonin geri alım inhibitörü.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514099057",
+    "name": "Minoset 500 mg 20 Tablet",
+    "active_ingredient": "Paracetamol",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "500 mg",
+    "package_size": "20 Tablet",
+    "description": "Analjezik ve antipiretik etki.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514099026",
+    "name": "Minoset Plus 500 mg 20 Tablet",
+    "active_ingredient": "Paracetamol / Caffeine",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "500 mg + 65 mg",
+    "package_size": "20 Tablet",
+    "description": "Parasetamol ve kafein içeren ağrı kesici.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514093017",
+    "name": "Theraflu Forte 650 mg 10 Tablet",
+    "active_ingredient": "Paracetamol / Phenylephrine / Chlorphenamine",
+    "manufacturer": "GlaxoSmithKline İlaçları San. ve Tic. A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "650 mg + 10 mg + 4 mg",
+    "package_size": "10 Tablet",
+    "description": "Soğuk algınlığı semptomlarını giderir.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699518356026",
+    "name": "Canesten 1% 20 g Krem",
+    "active_ingredient": "Clotrimazole",
+    "manufacturer": "Bayer Türk Kimya San. Ltd. Şti.",
+    "dosage_form": "Krem",
+    "strength": "%1",
+    "package_size": "20 g",
+    "description": "Topikal antifungal tedavi.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Dondurmayınız"
+    ]
+  },
+  {
+    "barcode": "8699794090549",
+    "name": "Imodium 2 mg 10 Kapsül",
+    "active_ingredient": "Loperamide Hydrochloride",
+    "manufacturer": "Johnson & Johnson Sıhhı Mamüller",
+    "dosage_form": "Kapsül",
+    "strength": "2 mg",
+    "package_size": "10 Kapsül",
+    "description": "İshalli durumlarda semptomatik tedavi.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514091037",
+    "name": "Hedex 500 mg 20 Tablet",
+    "active_ingredient": "Paracetamol",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "500 mg",
+    "package_size": "20 Tablet",
+    "description": "Parasetamol içeren ağrı kesici.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699792680018",
+    "name": "Otrivine 0.1% 10 ml Sprey",
+    "active_ingredient": "Xylometazoline Hydrochloride",
+    "manufacturer": "GlaxoSmithKline İlaçları San. ve Tic. A.Ş.",
+    "dosage_form": "Nazal Sprey",
+    "strength": "%0.1",
+    "package_size": "10 ml",
+    "description": "Nazal dekonjestan sprey.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "30°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514092027",
+    "name": "Ulcuran 150 mg 60 Tablet",
+    "active_ingredient": "Ranitidine Hydrochloride",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "150 mg",
+    "package_size": "60 Tablet",
+    "description": "Histamin H2 reseptör antagonisti.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699636500019",
+    "name": "Xanax 0.5 mg 30 Tablet",
+    "active_ingredient": "Alprazolam",
+    "manufacturer": "Pfizer İlaçları Ltd. Şti.",
+    "dosage_form": "Tablet",
+    "strength": "0.5 mg",
+    "package_size": "30 Tablet",
+    "description": "Anksiyete bozukluğu tedavisinde benzodiazepin.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz",
+      "Çocukların ulaşamayacağı yerde saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699504142059",
+    "name": "Glifor 1000 mg 100 Tablet",
+    "active_ingredient": "Metformin Hydrochloride",
+    "manufacturer": "Abdi İbrahim İlaç San. ve Tic. A.Ş.",
+    "dosage_form": "Film Tablet",
+    "strength": "1000 mg",
+    "package_size": "100 Tablet",
+    "description": "Tip 2 diyabette oral antihiperglisemik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "30°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699514098050",
+    "name": "Felis 20 mg 28 Tablet",
+    "active_ingredient": "Paroxetine Hydrochloride",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Film Tablet",
+    "strength": "20 mg",
+    "package_size": "28 Tablet",
+    "description": "SSRI antidepresan.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514095066",
+    "name": "Dramamine 50 mg 10 Tablet",
+    "active_ingredient": "Dimenhydrinate",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Çiğneme Tablet",
+    "strength": "50 mg",
+    "package_size": "10 Tablet",
+    "description": "Seyahat hastalığına karşı antihistaminik.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699504143193",
+    "name": "Nebilet 5 mg 28 Tablet",
+    "active_ingredient": "Nebivolol Hydrochloride",
+    "manufacturer": "Berlin-Chemie Menarini",
+    "dosage_form": "Tablet",
+    "strength": "5 mg",
+    "package_size": "28 Tablet",
+    "description": "Seçici beta-bloker antihipertansif.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699514093031",
+    "name": "Coldrex MaxGrip 1000 mg Toz İçeren Saşe",
+    "active_ingredient": "Paracetamol / Phenylephrine / Vitamin C",
+    "manufacturer": "GlaxoSmithKline İlaçları San. ve Tic. A.Ş.",
+    "dosage_form": "Toz içeren saşe",
+    "strength": "1000 mg + 10 mg + 40 mg",
+    "package_size": "10 Saşe",
+    "description": "Soğuk algınlığı semptomlarının giderilmesinde kullanılır.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699636500026",
+    "name": "Xanax 1 mg 30 Tablet",
+    "active_ingredient": "Alprazolam",
+    "manufacturer": "Pfizer İlaçları Ltd. Şti.",
+    "dosage_form": "Tablet",
+    "strength": "1 mg",
+    "package_size": "30 Tablet",
+    "description": "Benzodiazepin grubu anksiyolitik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699504143025",
+    "name": "Lipitor 40 mg 30 Tablet",
+    "active_ingredient": "Atorvastatin Calcium",
+    "manufacturer": "Pfizer İlaçları Ltd. Şti.",
+    "dosage_form": "Film Tablet",
+    "strength": "40 mg",
+    "package_size": "30 Tablet",
+    "description": "HMG-CoA redüktaz inhibitörü lipid düşürücü.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699522656015",
+    "name": "Zinnat 500 mg 10 Tablet",
+    "active_ingredient": "Cefuroxime Axetil",
+    "manufacturer": "GlaxoSmithKline İlaçları San. ve Tic. A.Ş.",
+    "dosage_form": "Film Tablet",
+    "strength": "500 mg",
+    "package_size": "10 Tablet",
+    "description": "İkinci kuşak sefalosporin antibiyotik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699522657012",
+    "name": "Zinnat 250 mg 10 Tablet",
+    "active_ingredient": "Cefuroxime Axetil",
+    "manufacturer": "GlaxoSmithKline İlaçları San. ve Tic. A.Ş.",
+    "dosage_form": "Film Tablet",
+    "strength": "250 mg",
+    "package_size": "10 Tablet",
+    "description": "Geniş spektrumlu sefalosporin antibiyotik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514098074",
+    "name": "Lamisil 1% 15 g Krem",
+    "active_ingredient": "Terbinafine Hydrochloride",
+    "manufacturer": "Novartis Sağlık Gıda ve Tarım Ürünleri San. ve Tic. A.Ş.",
+    "dosage_form": "Krem",
+    "strength": "%1",
+    "package_size": "15 g",
+    "description": "Topikal antifungal ajan.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699536092014",
+    "name": "Voltaren 50 mg 20 Tablet",
+    "active_ingredient": "Diclofenac Sodium",
+    "manufacturer": "Novartis Sağlık Gıda ve Tarım Ürünleri San. ve Tic. A.Ş.",
+    "dosage_form": "Enterik Kaplı Tablet",
+    "strength": "50 mg",
+    "package_size": "20 Tablet",
+    "description": "Nonsteroidal antiinflamatuvar analgesik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514099101",
+    "name": "Vermidon 500 mg 20 Tablet",
+    "active_ingredient": "Paracetamol / Propiphenazone / Caffeine",
+    "manufacturer": "Atabay İlaç Fabrikası A.Ş.",
+    "dosage_form": "Tablet",
+    "strength": "500 mg + 292 mg + 50 mg",
+    "package_size": "20 Tablet",
+    "description": "Parasetamol ve kafein içeren analjezik.",
+    "prescription_required": false,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699803090128",
+    "name": "Beloc Zok 50 mg 30 Tablet",
+    "active_ingredient": "Metoprolol Succinate",
+    "manufacturer": "AstraZeneca İlaç San. ve Tic. Ltd. Şti.",
+    "dosage_form": "Uzatılmış Salımlı Tablet",
+    "strength": "50 mg",
+    "package_size": "30 Tablet",
+    "description": "Beta-1 seçici blokör antihipertansif.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "30°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699658010013",
+    "name": "Coraspin 100 mg 30 Tablet",
+    "active_ingredient": "Acetylsalicylic Acid",
+    "manufacturer": "Bayer Türk Kimya San. Ltd. Şti.",
+    "dosage_form": "Enterik Kaplı Tablet",
+    "strength": "100 mg",
+    "package_size": "30 Tablet",
+    "description": "Düşük doz kardiyoprotektif aspirin.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699514092072",
+    "name": "Ventolin 100 mcg 200 Doz İnheler",
+    "active_ingredient": "Salbutamol",
+    "manufacturer": "GlaxoSmithKline İlaçları San. ve Tic. A.Ş.",
+    "dosage_form": "Aerosol İnheler",
+    "strength": "100 mcg/doz",
+    "package_size": "200 Doz",
+    "description": "Hızlı etkili beta-2 agonist bronkodilatör.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "30°C altında saklayınız",
+      "Buzdolabında saklamayınız"
+    ]
+  },
+  {
+    "barcode": "8699514091044",
+    "name": "Monurol 3 g Granül",
+    "active_ingredient": "Fosfomycin Trometamol",
+    "manufacturer": "İbrahim Ethem Ulagay",
+    "dosage_form": "Granül",
+    "strength": "3 g",
+    "package_size": "1 Saşe",
+    "description": "Tek dozluk geniş spektrumlu antibiyotik.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  },
+  {
+    "barcode": "8699504145029",
+    "name": "Concor 5 mg 30 Tablet",
+    "active_ingredient": "Bisoprolol Fumarate",
+    "manufacturer": "Merck Sağlık Ürünleri",
+    "dosage_form": "Film Tablet",
+    "strength": "5 mg",
+    "package_size": "30 Tablet",
+    "description": "Beta-1 selektif blokör antihipertansif.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız"
+    ]
+  },
+  {
+    "barcode": "8699514091242",
+    "name": "Laroxyl 25 mg 40 Draje",
+    "active_ingredient": "Amitriptyline Hydrochloride",
+    "manufacturer": "Abdi İbrahim İlaç San. ve Tic. A.Ş.",
+    "dosage_form": "Draje",
+    "strength": "25 mg",
+    "package_size": "40 Draje",
+    "description": "Trisiklik antidepresan.",
+    "prescription_required": true,
+    "storage_conditions": [
+      "25°C altında saklayınız",
+      "Nemden koruyunuz"
+    ]
+  }
+]
+

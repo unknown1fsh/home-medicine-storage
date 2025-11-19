@@ -8,7 +8,9 @@
     "dev": "nodemon server.js",
     "build": "echo 'No build step required'",
     "vercel-build": "echo 'Vercel build completed'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "railway": "npm start",
+    "postinstall": "echo 'Build completed'"
   },
   "keywords": ["medicine", "barcode", "storage", "tracking"],
   "author": "Medicine Storage App",

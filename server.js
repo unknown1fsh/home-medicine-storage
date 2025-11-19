@@ -1,14 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { testConnection } = require('./database');
-const config = require('./config');
+const { testConnection } = require('./src/config/database');
+const config = require('./src/config');
 
-// Route'ları import et
-const authRoutes = require('./routes/auth');
-const medicineRoutes = require('./routes/medicines');
-const stockRoutes = require('./routes/stocks');
-const alertRoutes = require('./routes/alerts');
+// Controller'ları import et
+const authController = require('./src/controllers/AuthController');
+const medicineController = require('./src/controllers/MedicineController');
+const stockController = require('./src/controllers/StockController');
+const alertController = require('./src/controllers/AlertController');
 
 const app = express();
 const PORT = config.server.port;
@@ -19,10 +19,10 @@ app.use(express.json({ charset: 'utf-8' }));
 app.use(express.urlencoded({ extended: true, charset: 'utf-8' }));
 
 // API Route'ları
-app.use('/api/auth', authRoutes);
-app.use('/api/medicines', medicineRoutes);
-app.use('/api/stocks', stockRoutes);
-app.use('/api/alerts', alertRoutes);
+app.use('/api/auth', authController);
+app.use('/api/medicines', medicineController);
+app.use('/api/stocks', stockController);
+app.use('/api/alerts', alertController);
 
 // Ana sayfa route'u
 app.get('/', (req, res) => {
@@ -39,15 +39,7 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Debug sayfası route'u
-app.get('/debug', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'debug.html'));
-});
-
-// Test sayfası route'u
-app.get('/test', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'test.html'));
-});
+// Debug ve Test sayfaları kaldırıldı
 
 // Static dosyalar için (route'lardan sonra)
 app.use(express.static(path.join(__dirname, 'public')));
@@ -94,10 +86,12 @@ const startServer = async () => {
     await testConnection();
     
     app.listen(PORT, () => {
-      console.log(`🚀 Sunucu http://localhost:${PORT} adresinde çalışıyor`);
+      console.log(`🚀 Sunucu ${PORT} portunda çalışıyor`);
+      console.log(`🌐 URL: ${process.env.RAILWAY_PUBLIC_DOMAIN || 'http://localhost:' + PORT}`);
       console.log(`📊 API Endpoints:`);
-      console.log(`   - GET  /api/health`);
+      console.log(`   - POST /api/auth/login`);
       console.log(`   - GET  /api/medicines`);
+      console.log(`   - GET  /api/medicines/barcode/:barcode`);
       console.log(`   - POST /api/medicines`);
       console.log(`   - GET  /api/stocks`);
       console.log(`   - POST /api/stocks`);

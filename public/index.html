@@ -78,6 +78,40 @@
             display: none;
         }
         
+        .manual-barcode-input {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .manual-barcode-input .input-group-text {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .manual-barcode-input .form-control {
+            border-color: #ddd;
+            font-size: 16px;
+        }
+        
+        .manual-barcode-input .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(44, 90, 160, 0.25);
+        }
+        
+        .manual-input-help {
+            margin-top: 8px;
+            text-align: center;
+        }
+        
         .scanner-container {
             position: relative;
             width: 100%;
@@ -313,11 +347,46 @@
                             </h5>
                         </div>
                         <div class="card-body text-center">
-                            <button class="btn btn-primary btn-lg" onclick="startBarcodeScanner()">
-                                <i class="fas fa-camera me-2"></i>
-                                Barkod/Karekod Okut
-                            </button>
-                            <p class="text-muted mt-3">İlacın barkodunu veya karekodunu okutarak bilgilerini çekin</p>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <button class="btn btn-primary btn-lg w-100" onclick="startBarcodeScanner()">
+                                        <i class="fas fa-camera me-2"></i>
+                                        Barkod/Karekod Okut
+                                    </button>
+                                    <p class="text-muted mt-2">Kamera ile barkod okutun</p>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <button class="btn btn-outline-primary btn-lg w-100" onclick="showManualBarcodeInput()">
+                                        <i class="fas fa-keyboard me-2"></i>
+                                        Elle Barkod Gir
+                                    </button>
+                                    <p class="text-muted mt-2">Barkod numarasını elle yazın</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Kamera Seçimi -->
+                            <div class="mt-3" id="cameraSelection" style="display: none;">
+                                <label class="form-label">Kamera Seçin:</label>
+                                <select class="form-select" id="cameraSelect">
+                                    <option value="">Varsayılan Kamera</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Kamera Bilgi Mesajları -->
+                            <div class="alert alert-info mt-3" id="cameraInfo" style="display: none;">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <small>Kamera erişimi için izin verilmesi gerekmektedir. Tarayıcınızın kamera iznini kontrol edin.</small>
+                            </div>
+                            
+                            <!-- Sorun Giderme -->
+                            <div class="mt-3">
+                                <button class="btn btn-outline-secondary btn-sm" onclick="app.diagnoseCameraIssues()">
+                                    <i class="fas fa-stethoscope me-2"></i>Kamera Sorunlarını Tespit Et
+                                </button>
+                                <button class="btn btn-outline-warning btn-sm ms-2" onclick="app.tryFixNotReadableError()">
+                                    <i class="fas fa-wrench me-2"></i>NotReadableError Çözümü Dene
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -584,6 +653,27 @@
                 <i class="fas fa-camera me-2"></i>
                 Barkodu kameraya doğru tutun
             </div>
+            
+            <!-- Elle Barkod Girme Alanı -->
+            <div class="manual-barcode-input">
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <i class="fas fa-keyboard"></i>
+                    </span>
+                    <input type="text" id="manualBarcodeInput" class="form-control" 
+                           placeholder="Barkod numarasını elle girin..." 
+                           maxlength="20">
+                    <button class="btn btn-success" onclick="searchMedicineByManualBarcode()">
+                        <i class="fas fa-search"></i> Ara
+                    </button>
+                </div>
+                <div class="manual-input-help">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        Kamera çalışmıyorsa veya barkod okunamıyorsa buraya yazabilirsiniz
+                    </small>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -600,7 +690,8 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js" 
+            onerror="console.error('QuaggaJS kütüphanesi yüklenemedi')"></script>
     <script src="app.js"></script>
 </body>
 </html>

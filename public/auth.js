@@ -1,7 +1,9 @@
 // Authentication JavaScript
 class AuthManager {
     constructor() {
-        this.apiBaseUrl = 'http://localhost:3000/api';
+        // Dinamik API URL - Railway deployment için
+        this.apiBaseUrl = (window.location.origin || 'http://localhost:3000') + '/api';
+        console.log('Auth API Base URL:', this.apiBaseUrl);
         this.init();
     }
 
